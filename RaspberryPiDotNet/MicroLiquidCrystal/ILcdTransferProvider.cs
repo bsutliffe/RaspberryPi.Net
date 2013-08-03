@@ -6,7 +6,7 @@ namespace RaspberryPiDotNet.MicroLiquidCrystal
 {
     public interface ILcdTransferProvider
     {
-        void Send(byte data, bool mode, bool backlight);
+        void Send(byte data, bool mode, bool backlight, bool highOnly = false);
 
         /// <summary>
         /// Specify if the provider works in 4-bit mode; 8-bit mode is used otherwise.

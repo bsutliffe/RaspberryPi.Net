@@ -14,7 +14,7 @@ namespace RaspberryPiDotNet
 	///    tar -zxf bcm2835-1.3.tar.gz
 	///    cd bcm2835-1.3/src
 	///    make libbcm2835.a
-	///    cc -shared bcm2835.o -o libbcm2835.so
+	///    cc -shared bcm2835.o -o libbcm2835
 	/// Place the shared object in the same directory as the executable and other assemblies.
 	/// </summary>
 	public class GPIOMem : GPIO
@@ -102,28 +102,28 @@ namespace RaspberryPiDotNet
 		#endregion
 
 		#region Imported functions
-		[DllImport("libbcm2835.so", EntryPoint = "bcm2835_init")]
+		[DllImport("libbcm2835", EntryPoint = "bcm2835_init")]
 		static extern bool bcm2835_init();
 
-		[DllImport("libbcm2835.so", EntryPoint = "bcm2835_gpio_fsel")]
+		[DllImport("libbcm2835", EntryPoint = "bcm2835_gpio_fsel")]
 		static extern void bcm2835_gpio_fsel(GPIOPins pin, bool mode_out);
 
-		[DllImport("libbcm2835.so", EntryPoint = "bcm2835_gpio_write")]
+		[DllImport("libbcm2835", EntryPoint = "bcm2835_gpio_write")]
 		static extern void bcm2835_gpio_write(GPIOPins pin, bool value);
 
-		[DllImport("libbcm2835.so", EntryPoint = "bcm2835_gpio_lev")]
+		[DllImport("libbcm2835", EntryPoint = "bcm2835_gpio_lev")]
 		static extern bool bcm2835_gpio_lev(GPIOPins pin);
 
-		[DllImport("libbcm2835.so", EntryPoint = "bcm2835_gpio_set_pud")]
+		[DllImport("libbcm2835", EntryPoint = "bcm2835_gpio_set_pud")]
 		static extern void bcm2835_gpio_set_pud(GPIOPins pin, uint pud);
 
-		[DllImport("libbcm2835.so", EntryPoint = "bcm2835_gpio_set_multi")]
+		[DllImport("libbcm2835", EntryPoint = "bcm2835_gpio_set_multi")]
 		static extern void bcm2835_gpio_set_multi(GPIOPinMask mask);
 
-		[DllImport("libbcm2835.so", EntryPoint = "bcm2835_gpio_clr_multi")]
+		[DllImport("libbcm2835", EntryPoint = "bcm2835_gpio_clr_multi")]
 		static extern void bcm2835_gpio_clr_multi(GPIOPinMask mask);
 
-		[DllImport("libbcm2835.so", EntryPoint = "bcm2835_gpio_write_multi")]
+		[DllImport("libbcm2835", EntryPoint = "bcm2835_gpio_write_multi")]
 		static extern void bcm2835_gpio_write_multi(GPIOPinMask mask, bool on);
 
 		#endregion

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 
 // Author: Aaron Anderson <aanderson@netopia.ca>
-namespace RaspberryPiDotNet
-{
+namespace RaspberryPiDotNet {
 	/// <summary>
 	/// Abstract class for the GPIO connector on the Pi (P1) (as found next to the yellow RCA video socket on the Rpi circuit board)
 	/// </summary>
-	public abstract class GPIO : IDisposable
-	{
+	public abstract class GPIO : IDisposable {
+
 		/// <summary>
 		/// Dictionary that stores created (exported) pins that where not disposed.
 		/// </summary>
@@ -87,8 +86,7 @@ namespace RaspberryPiDotNet
 				try {
 					PinDirection = direction;
 					Write(initialValue);
-				}
-				catch {
+				} catch {
 					Dispose();
 					throw;
 				}
@@ -145,9 +143,10 @@ namespace RaspberryPiDotNet
 #if DEBUG
 			catch (Exception e) {
 				System.Diagnostics.Debug.WriteLine("Unable to create pin " + (uint)pin + " as GPIOMem because: " + e.ToString());
+				//Console.WriteLine("Unable to create pin " + (uint)pin + " as GPIOMem because: " + e.ToString());
 			}
 #else
-			catch //stuff like lib load problems, wrong exports, etc...
+ catch //stuff like lib load problems, wrong exports, etc...
 			{
 			}
 #endif
@@ -157,9 +156,10 @@ namespace RaspberryPiDotNet
 #if DEBUG
 			catch (Exception e) {
 				System.Diagnostics.Debug.WriteLine("Unable to create pin " + (uint)pin + " as GPIOFile because: " + e.ToString());
+				//Console.WriteLine("Unable to create pin " + (uint)pin + " as GPIOFile because: " + e.ToString());
 			}
 #else
-			catch //stuff like GPIO Sys FS does not exist or is not responding, open by another process, etc...
+ catch //stuff like GPIO Sys FS does not exist or is not responding, open by another process, etc...
 			{
 			}
 #endif
