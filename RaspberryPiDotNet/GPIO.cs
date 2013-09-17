@@ -129,27 +129,27 @@ namespace RaspberryPiDotNet {
 		/// <param name="pin">The pin to create or export</param>
 		/// <param name="dir">The direction the pin is to have</param>
 		/// <returns>The GPIO instance representing the pin</returns>
-		public static GPIO CreatePin(GPIOPins pin, GPIODirection dir) {
+		public static GPIO CreatePin(GPIOPins pin, GPIODirection dir, bool forceFile = false) {
 			lock (_exportedPins)
 				if (_exportedPins.ContainsKey(pin)) {
 					if (_exportedPins[pin].PinDirection != dir)
 						_exportedPins[pin].PinDirection = dir;
 					return _exportedPins[pin];
 				}
-
-			try {
-				return new GPIOMem(pin, dir);
-			}
+			if (!forceFile) {
+				try {
+					return new GPIOMem(pin, dir);
+				}
 #if DEBUG
-			catch (Exception e) {
-				System.Diagnostics.Debug.WriteLine("Unable to create pin " + (uint)pin + " as GPIOMem because: " + e.ToString());
-				//Console.WriteLine("Unable to create pin " + (uint)pin + " as GPIOMem because: " + e.ToString());
-			}
+				catch (Exception e) {
+					System.Diagnostics.Debug.WriteLine("Unable to create pin " + (uint)pin + " as GPIOMem because: " + e.ToString());
+					//Console.WriteLine("Unable to create pin " + (uint)pin + " as GPIOMem because: " + e.ToString());
+				}
 #else
- catch //stuff like lib load problems, wrong exports, etc...
-			{
-			}
+				catch //stuff like lib load problems, wrong exports, etc...
+				{ }
 #endif
+			}
 			try {
 				return new GPIOFile(pin, dir);
 			}
